@@ -16,7 +16,7 @@ PAGES_TO_GO_THROUGH = 25
 
 # the title of the page that stores the last page this bot has seen 
 # and where to pick up on a later execution
-STORAGE_PAGE = "Mediawiki:AddDOEContentTemplate"
+STORAGE_PAGE = "Powerpedia:AddDOEContentTemplate"
 
 # template name
 TEMPLATE_STR = "{{DOE content needed}}"
