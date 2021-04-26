@@ -144,6 +144,7 @@ class ContentTemplateBot:
                     if not this_section_has_content:
                         # add the template
                         lines_to_insert.append(line_no)
+                        in_doe_header = False
 
                     if self._detect_doe_header(line):
                         # re-initialize variables for new doe header
@@ -153,9 +154,17 @@ class ContentTemplateBot:
                     if len(line.strip()) > 0:
                         # in doe header, encountered content
                         this_section_has_content = True
+        
+        # edge case: check at end
+        added_to_end = False
+
+        if in_doe_header and not this_section_has_content:
+            # add to end
+            page_lines.append(TEMPLATE_STR)
+            added_to_end = True
 
         # insert templates
-        if lines_to_insert:
+        if lines_to_insert or added_to_end:
             templates_inserted = 0
             for line_no in lines_to_insert:
                 page_lines.insert(line_no + templates_inserted, TEMPLATE_STR)
@@ -191,6 +200,7 @@ class ContentTemplateBot:
 
         # parse out the name
         true_name = (m.group(0)[true_level:-true_level]).strip().lower()
+        print(repr(true_name))
 
         # check name against viable titles
         return true_name in doe_titles
