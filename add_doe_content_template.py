@@ -107,6 +107,7 @@ class ContentTemplateBot:
 
         # loop through pages
         for page in pages_to_run:
+            print(page)
             # run main function
             last_page_seen = page['title']
             self.main_function(last_page_seen)
@@ -200,7 +201,7 @@ class ContentTemplateBot:
 
         # parse out the name
         true_name = (m.group(0)[true_level:-true_level]).strip().lower()
-        print(repr(true_name))
+        #print(repr(true_name))
 
         # check name against viable titles
         return true_name in doe_titles
@@ -219,6 +220,7 @@ if __name__ == "__main__":
         site=pywikibot.Site(),
         reference_page_title=STORAGE_PAGE
     )
+    
 
     # run the bot
     bot.run()
